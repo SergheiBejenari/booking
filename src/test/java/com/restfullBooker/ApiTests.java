@@ -1,19 +1,22 @@
 package com.restfullBooker;
 
-
 import com.restfullBooker.api.BookingApi;
+import com.restfullBooker.driver.Driver;
 import com.restfullBooker.payloads.Booking;
 import com.restfullBooker.payloads.BookingDates;
 import com.restfullBooker.payloads.BookingResponse;
+import com.restfullBooker.utils.Wait;
 import io.restassured.response.Response;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ApiTests {
-
     BookingResponse bookingPostResponseObj;
     Response postResponseJson;
     Booking bookingObj;
@@ -92,11 +95,19 @@ public class ApiTests {
         assertEquals(bookingGetResponseJson.getStatusCode(), 200);
     }
 
+
     @Test(dependsOnMethods = "testCreateBookingReturns200")
     public void isPresentFullName() {
-        //BookingPage bookingPage = new BookingPage(Driver.getDriver());
-        // bookingPage.setupWebDriver();
-        //  bookingPage.isPresentFullName();
-    }
+        WebDriver driver = new Driver().getDriver();
+        Wait wait = new Wait(driver);
+        wait.sendKeys(driver.findElement(By.xpath("//input[@class='form-control search']")), fullName);
 
+        String bodyText = driver.findElement(By.tagName("body")).getText();
+        if (bodyText.contains("restful-booker")) {
+            System.out.println("Text Found");
+        } else
+            System.out.println("Text Not Found");
+
+        assertTrue("Text Not Found", bodyText.contains("restful-booker"));
+    }
 }
