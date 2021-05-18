@@ -1,0 +1,23 @@
+1. Create a Java project in your editor of choice.
+
+2. Using Rest Assured make a POST request to https://restful-booker.herokuapp.com/booking/1 that fails to create a new booking.
+
+3. Using Rest Assured make a POST request to https://restful-booker.herokuapp.com/booking/1 that creates a new booking.
+
+3.1. Validate that the response contains the same values in the tags that were provided as part of the POST
+
+3.2. Validate that the response status code is as expected
+
+4. From the response get the id of new booking and use it for a GET request to  https://restful-booker.herokuapp.com/booking/id
+
+4.1. Validate that the response contains the same values in the tags that were provided as part of the POST
+
+4.2. Validate that the response status code is as expected
+
+5. From the response save the "firstname" and "lastname" values to a new variable called "fullName"
+
+6. Using Selenium Webdriver open  https://restful-booker.herokuapp.com/apidoc/index.html
+
+7. In the upper left corner there is a "Filter" textbox, input the value of the "fullName" variable in that textbox.
+
+8. If the text "restful-booker" is present on the page then print out "Text Found", else print out "Text Not Found"
